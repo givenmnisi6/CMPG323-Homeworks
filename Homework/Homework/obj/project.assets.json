@@ -5958,11 +5958,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\GIVEN MNISI\\source\\repos\\Homework\\Homework\\Homework.csproj",
+      "projectUniqueName": "C:\\Users\\GIVEN MNISI\\Source\\Repos\\givenmnisi6\\CMPG323-Homeworks\\Homework\\Homework\\Homework.csproj",
       "projectName": "Homework",
-      "projectPath": "C:\\Users\\GIVEN MNISI\\source\\repos\\Homework\\Homework\\Homework.csproj",
+      "projectPath": "C:\\Users\\GIVEN MNISI\\Source\\Repos\\givenmnisi6\\CMPG323-Homeworks\\Homework\\Homework\\Homework.csproj",
       "packagesPath": "C:\\Users\\GIVEN MNISI\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\GIVEN MNISI\\source\\repos\\Homework\\Homework\\obj\\",
+      "outputPath": "C:\\Users\\GIVEN MNISI\\Source\\Repos\\givenmnisi6\\CMPG323-Homeworks\\Homework\\Homework\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
