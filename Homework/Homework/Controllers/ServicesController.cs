@@ -11,28 +11,25 @@ using Homework.Repository;
 
 namespace Homework.Controllers
 {
-    public class ProductsController : Controller
+    public class ServicesController : Controller
     {
         private readonly ProductDBContext _context;
+        private readonly IServiceRepository _serviceRepository; 
 
-        public ProductsController(ProductDBContext context)
+        public ServicesController(ProductDBContext context, IServiceRepository serviceRepository)
         {
             _context = context;
+            _serviceRepository = serviceRepository;
         }
 
-        // GET: Products
-        // GET: Products
+        // GET: Services
         public async Task<IActionResult> Index()
         {
-            ProductRepository productRepository = new ProductRepository();
-
-            var results = productRepository.GetAll();
-
-            return View(results);
+            return View(_serviceRepository.GetAll());
         }
 
 
-        // GET: Products/Details/5
+        // GET: Services/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -40,40 +37,40 @@ namespace Homework.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Product
-                .FirstOrDefaultAsync(m => m.ProductId == id);
-            if (product == null)
+            var service = await _context.Service
+                .FirstOrDefaultAsync(m => m.ServiceId == id);
+            if (service == null)
             {
                 return NotFound();
             }
 
-            return View(product);
+            return View(service);
         }
 
-        // GET: Products/Create
+        // GET: Services/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Products/Create
+        // POST: Services/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,ProductName,ProductDescription,CreatedDate")] Product product)
+        public async Task<IActionResult> Create([Bind("ServiceId,ServiceName,ServiceDescription,CreatedDate")] Service service)
         {
             if (ModelState.IsValid)
             {
-                product.ProductId = Guid.NewGuid();
-                _context.Add(product);
+                service.ServiceId = Guid.NewGuid();
+                _context.Add(service);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            return View(service);
         }
 
-        // GET: Products/Edit/5
+        // GET: Services/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -81,22 +78,22 @@ namespace Homework.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Product.FindAsync(id);
-            if (product == null)
+            var service = await _context.Service.FindAsync(id);
+            if (service == null)
             {
                 return NotFound();
             }
-            return View(product);
+            return View(service);
         }
 
-        // POST: Products/Edit/5
+        // POST: Services/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("ProductId,ProductName,ProductDescription,CreatedDate")] Product product)
+        public async Task<IActionResult> Edit(Guid id, [Bind("ServiceId,ServiceName,ServiceDescription,CreatedDate")] Service service)
         {
-            if (id != product.ProductId)
+            if (id != service.ServiceId)
             {
                 return NotFound();
             }
@@ -105,12 +102,12 @@ namespace Homework.Controllers
             {
                 try
                 {
-                    _context.Update(product);
+                    _context.Update(service);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductExists(product.ProductId))
+                    if (!ServiceExists(service.ServiceId))
                     {
                         return NotFound();
                     }
@@ -121,10 +118,10 @@ namespace Homework.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            return View(service);
         }
 
-        // GET: Products/Delete/5
+        // GET: Services/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -132,30 +129,30 @@ namespace Homework.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Product
-                .FirstOrDefaultAsync(m => m.ProductId == id);
-            if (product == null)
+            var service = await _context.Service
+                .FirstOrDefaultAsync(m => m.ServiceId == id);
+            if (service == null)
             {
                 return NotFound();
             }
 
-            return View(product);
+            return View(service);
         }
 
-        // POST: Products/Delete/5
+        // POST: Services/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var product = await _context.Product.FindAsync(id);
-            _context.Product.Remove(product);
+            var service = await _context.Service.FindAsync(id);
+            _context.Service.Remove(service);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProductExists(Guid id)
+        private bool ServiceExists(Guid id)
         {
-            return _context.Product.Any(e => e.ProductId == id);
+            return _context.Service.Any(e => e.ServiceId == id);
         }
     }
 }
